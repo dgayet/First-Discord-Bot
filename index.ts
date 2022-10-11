@@ -2,6 +2,7 @@
 // import { getRates, Currency, convertCurrencies } from "../web-scrapping-infobae-currency/currency_rates.js"
 
 const {getRates, Currency, convertCurrencies} = require ("../web-scrapping-infobae-currency/currency_rates.js");
+const {generateQR} = require("./googleQR.js");
 const {Client, GatewayIntentBits} = require('discord.js'); // adds discord.js module
 const config = require('./config.json'); // gets file with information about bot token
 
@@ -20,7 +21,7 @@ client.once('ready', () => {
 client.on('interactionCreate', async interaction => {
     if (interaction.user.bot) return;
     if (!interaction.isChatInputCommand()) return;
-	console.log(interaction);
+	//console.log(interaction);
 
     if (interaction.commandName === 'ping') {
         let timeStamp = interaction.createdTimestamp;
@@ -48,6 +49,10 @@ client.on('interactionCreate', async interaction => {
         });
         console.log(string_response);
         await interaction.reply(string_response);
+    } else if (interaction.commandName === 'qr') {
+        const url = interaction.options.getString('url');
+        console.log(url);
+        await interaction.reply(generateQR(url, 200, 200, '#990099'));
     }
 });
 

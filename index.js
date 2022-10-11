@@ -38,6 +38,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 var _a = require("../web-scrapping-infobae-currency/currency_rates.js"), getRates = _a.getRates, Currency = _a.Currency, convertCurrencies = _a.convertCurrencies;
+var generateQR = require("./googleQR.js").generateQR;
 var _b = require('discord.js'), Client = _b.Client, GatewayIntentBits = _b.GatewayIntentBits; // adds discord.js module
 var config = require('./config.json'); // gets file with information about bot token
 var client = new Client({ intents: [GatewayIntentBits.Guilds,
@@ -49,7 +50,7 @@ client.once('ready', function () {
     console.log('Ready!');
 });
 client.on('interactionCreate', function (interaction) { return __awaiter(_this, void 0, void 0, function () {
-    var timeStamp, latency, usdVal, values, arr_values, string_response_1, arsVal, values, arr_values, string_response_2;
+    var timeStamp, latency, usdVal, values, arr_values, string_response_1, arsVal, values, arr_values, string_response_2, url;
     var _this = this;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -58,14 +59,13 @@ client.on('interactionCreate', function (interaction) { return __awaiter(_this, 
                     return [2 /*return*/];
                 if (!interaction.isChatInputCommand())
                     return [2 /*return*/];
-                console.log(interaction);
                 if (!(interaction.commandName === 'ping')) return [3 /*break*/, 2];
                 timeStamp = interaction.createdTimestamp;
                 latency = Date.now() - timeStamp;
                 return [4 /*yield*/, interaction.reply("Latency is ".concat(latency, "ms."))];
             case 1:
                 _a.sent();
-                return [3 /*break*/, 8];
+                return [3 /*break*/, 10];
             case 2:
                 if (!(interaction.commandName === 'usd2ars')) return [3 /*break*/, 5];
                 usdVal = interaction.options.getNumber('val');
@@ -85,7 +85,7 @@ client.on('interactionCreate', function (interaction) { return __awaiter(_this, 
                 return [4 /*yield*/, interaction.reply(string_response_1)];
             case 4:
                 _a.sent();
-                return [3 /*break*/, 8];
+                return [3 /*break*/, 10];
             case 5:
                 if (!(interaction.commandName === 'ars2usd')) return [3 /*break*/, 8];
                 arsVal = interaction.options.getNumber('val');
@@ -105,8 +105,16 @@ client.on('interactionCreate', function (interaction) { return __awaiter(_this, 
                 return [4 /*yield*/, interaction.reply(string_response_2)];
             case 7:
                 _a.sent();
-                _a.label = 8;
-            case 8: return [2 /*return*/];
+                return [3 /*break*/, 10];
+            case 8:
+                if (!(interaction.commandName === 'qr')) return [3 /*break*/, 10];
+                url = interaction.options.getString('url');
+                console.log(url);
+                return [4 /*yield*/, interaction.reply(generateQR(url, 200, 200, '#990099'))];
+            case 9:
+                _a.sent();
+                _a.label = 10;
+            case 10: return [2 /*return*/];
         }
     });
 }); });

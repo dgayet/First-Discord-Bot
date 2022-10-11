@@ -16,6 +16,12 @@ var commands = [
         .addNumberOption(function (option) { return option.setName('val')
         .setDescription('The ARS value tu convert')
         .setRequired(true); }),
+    new SlashCommandBuilder()
+        .setName('qr')
+        .setDescription('Generates QR code for the url provided')
+        .addStringOption(function (option) { return option.setName('url')
+        .setDescription('url to generate QR code from')
+        .setRequired(true); }),
 ]
     .map(function (command) { return command.toJSON(); });
 var rest = new REST({ version: '10' }).setToken(BOT_TOKEN);
