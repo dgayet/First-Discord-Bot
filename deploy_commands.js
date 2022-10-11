@@ -3,7 +3,7 @@ var _a = require('discord.js'), REST = _a.REST, SlashCommandBuilder = _a.SlashCo
 var _b = require('./config.json'), APP_ID = _b.APP_ID, SERVER_ID = _b.SERVER_ID, BOT_TOKEN = _b.BOT_TOKEN;
 // array with commands
 var commands = [
-    new SlashCommandBuilder().setName('ping').setDescription('Replies with ping'),
+    new SlashCommandBuilder().setName('ping').setDescription('Replies with latency'),
     new SlashCommandBuilder()
         .setName('usd2ars')
         .setDescription('Replies with equivalent ARS value of (USD) argument passed')

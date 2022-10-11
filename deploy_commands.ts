@@ -5,7 +5,7 @@ const {APP_ID, SERVER_ID, BOT_TOKEN} = require('./config.json');
 
 // array with commands
 const commands = [
-	new SlashCommandBuilder().setName('ping').setDescription('Replies with ping'),
+	new SlashCommandBuilder().setName('ping').setDescription('Replies with latency'),
 	new SlashCommandBuilder()
         .setName('usd2ars')
         .setDescription('Replies with equivalent ARS value of (USD) argument passed')
