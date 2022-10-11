@@ -13,7 +13,7 @@ Discord Bot developed in Node.js
 
 
 ## Execution
-create `config.json` wieh following syntax:
+create `config.json` with following syntax:
 
 ```json
     {
@@ -25,8 +25,8 @@ create `config.json` wieh following syntax:
 
 execute `deploy_commands.js` to configure commands in Discord server:
 
-`node deploy_commands` only do it once (or when modified).
+    `node deploy_commands` only do it once (or when modified).
 
 execute `index.js` to run bot:
 
-`node index.js`
+    `node index.js`
