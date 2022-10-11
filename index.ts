@@ -1,8 +1,8 @@
 //import { IntegrationApplication, messageLink } from "discord.js";
 // import { getRates, Currency, convertCurrencies } from "../web-scrapping-infobae-currency/currency_rates.js"
 
-const {getRates, Currency, convertCurrencies} = require ("../web-scrapping-infobae-currency/currency_rates.js");
-const {generateQR} = require("./googleQR.js");
+const {getRates, Currency, convertCurrencies} = require ("./APIs/currency_rates.js");
+const {generateQR} = require("./APIs/googleQR.js");
 const {Client, GatewayIntentBits} = require('discord.js'); // adds discord.js module
 const config = require('./config.json'); // gets file with information about bot token
 

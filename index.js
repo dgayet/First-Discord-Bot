@@ -37,8 +37,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var _this = this;
-var _a = require("../web-scrapping-infobae-currency/currency_rates.js"), getRates = _a.getRates, Currency = _a.Currency, convertCurrencies = _a.convertCurrencies;
-var generateQR = require("./googleQR.js").generateQR;
+var _a = require("./APIs/currency_rates.js"), getRates = _a.getRates, Currency = _a.Currency, convertCurrencies = _a.convertCurrencies;
+var generateQR = require("./APIs/googleQR.js").generateQR;
 var _b = require('discord.js'), Client = _b.Client, GatewayIntentBits = _b.GatewayIntentBits; // adds discord.js module
 var config = require('./config.json'); // gets file with information about bot token
 var client = new Client({ intents: [GatewayIntentBits.Guilds,
