@@ -1,9 +1,11 @@
-import { IntegrationApplication, messageLink } from "discord.js";
+//import { IntegrationApplication, messageLink } from "discord.js";
+// import { getRates, Currency, convertCurrencies } from "../web-scrapping-infobae-currency/currency_rates.js"
 
+const {getRates, Currency, convertCurrencies} = require ("../web-scrapping-infobae-currency/currency_rates.js");
 const {Client, GatewayIntentBits} = require('discord.js'); // adds discord.js module
 const config = require('./config.json'); // gets file with information about bot token
 
-console.log("hola");
+
 const client = new Client({intents: [GatewayIntentBits.Guilds,
                                     GatewayIntentBits.GuildMessages,
                                     GatewayIntentBits.MessageContent]}); // creates a discord client (the bot).
@@ -25,11 +27,31 @@ client.on('interactionCreate', async interaction => {
         let latency = Date.now() - timeStamp;
 		await interaction.reply(`Latency is ${latency}ms.`);
     } else if (interaction.commandName === 'usd2ars') {
-        const usdVal = interaction.options.getNumber('usdval');
+        const usdVal = interaction.options.getNumber('val');
         console.log(usdVal);
-        await interaction.reply(`I'm thinking`);
+        let values = convertCurrencies(usdVal, getRates(), true);
+        let arr_values = await values;
+        let string_response = `Valor a convertir: ${usdVal}. \n\n`;
+        arr_values.forEach(async (x,i) => {
+            string_response += `${x.currency}: ${x.value} \n`;
+        });
+        console.log(string_response);
+        await interaction.reply(string_response);
+    } else if (interaction.commandName === 'ars2usd') {
+        const arsVal = interaction.options.getNumber('val');
+        console.log(arsVal);
+        let values = convertCurrencies(arsVal, getRates(), false);
+        let arr_values = await values;
+        let string_response = `Valor a convertir: ${arsVal}. \n\n`;
+        arr_values.forEach(async (x,i) => {
+            string_response += `${x.currency}: ${x.value} \n`;
+        });
+        console.log(string_response);
+        await interaction.reply(string_response);
     }
 });
+
+
 
 client.login(config.BOT_TOKEN); // this logs in to the discord bot and uses the token in config.json as credentials
 

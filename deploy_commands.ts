@@ -9,13 +9,13 @@ const commands = [
 	new SlashCommandBuilder()
         .setName('usd2ars')
         .setDescription('Replies with equivalent ARS value of (USD) argument passed')
-        .addNumberOption(option => option.setName('usdval')
+        .addNumberOption(option => option.setName('val')
             .setDescription('The USD value tu convert')
             .setRequired(true)),
 	new SlashCommandBuilder()
         .setName('ars2usd')
         .setDescription('Replies with equivalent USD value of (ARS) argument passed')
-        .addNumberOption(option => option.setName('arsval')
+        .addNumberOption(option => option.setName('val')
             .setDescription('The ARS value tu convert')
             .setRequired(true)),
 ]

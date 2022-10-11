@@ -1,4 +1,5 @@
-"use strict";
+//import { IntegrationApplication, messageLink } from "discord.js";
+// import { getRates, Currency, convertCurrencies } from "../web-scrapping-infobae-currency/currency_rates.js"
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -35,10 +36,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-exports.__esModule = true;
-var _a = require('discord.js'), Client = _a.Client, GatewayIntentBits = _a.GatewayIntentBits; // adds discord.js module
+var _this = this;
+var _a = require("../web-scrapping-infobae-currency/currency_rates.js"), getRates = _a.getRates, Currency = _a.Currency, convertCurrencies = _a.convertCurrencies;
+var _b = require('discord.js'), Client = _b.Client, GatewayIntentBits = _b.GatewayIntentBits; // adds discord.js module
 var config = require('./config.json'); // gets file with information about bot token
-console.log("hola");
 var client = new Client({ intents: [GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent] }); // creates a discord client (the bot).
@@ -47,8 +48,9 @@ var client = new Client({ intents: [GatewayIntentBits.Guilds,
 client.once('ready', function () {
     console.log('Ready!');
 });
-client.on('interactionCreate', function (interaction) { return __awaiter(void 0, void 0, void 0, function () {
-    var timeStamp, latency, usdVal;
+client.on('interactionCreate', function (interaction) { return __awaiter(_this, void 0, void 0, function () {
+    var timeStamp, latency, usdVal, values, arr_values, string_response_1, arsVal, values, arr_values, string_response_2;
+    var _this = this;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -63,16 +65,48 @@ client.on('interactionCreate', function (interaction) { return __awaiter(void 0,
                 return [4 /*yield*/, interaction.reply("Latency is ".concat(latency, "ms."))];
             case 1:
                 _a.sent();
-                return [3 /*break*/, 4];
+                return [3 /*break*/, 8];
             case 2:
-                if (!(interaction.commandName === 'usd2ars')) return [3 /*break*/, 4];
-                usdVal = interaction.options.getNumber('usdval');
+                if (!(interaction.commandName === 'usd2ars')) return [3 /*break*/, 5];
+                usdVal = interaction.options.getNumber('val');
                 console.log(usdVal);
-                return [4 /*yield*/, interaction.reply("I'm thinking")];
+                values = convertCurrencies(usdVal, getRates(), true);
+                return [4 /*yield*/, values];
             case 3:
+                arr_values = _a.sent();
+                string_response_1 = "Valor a convertir: ".concat(usdVal, ". \n\n");
+                arr_values.forEach(function (x, i) { return __awaiter(_this, void 0, void 0, function () {
+                    return __generator(this, function (_a) {
+                        string_response_1 += "".concat(x.currency, ": ").concat(x.value, " \n");
+                        return [2 /*return*/];
+                    });
+                }); });
+                console.log(string_response_1);
+                return [4 /*yield*/, interaction.reply(string_response_1)];
+            case 4:
                 _a.sent();
-                _a.label = 4;
-            case 4: return [2 /*return*/];
+                return [3 /*break*/, 8];
+            case 5:
+                if (!(interaction.commandName === 'ars2usd')) return [3 /*break*/, 8];
+                arsVal = interaction.options.getNumber('val');
+                console.log(arsVal);
+                values = convertCurrencies(arsVal, getRates(), false);
+                return [4 /*yield*/, values];
+            case 6:
+                arr_values = _a.sent();
+                string_response_2 = "Valor a convertir: ".concat(arsVal, ". \n\n");
+                arr_values.forEach(function (x, i) { return __awaiter(_this, void 0, void 0, function () {
+                    return __generator(this, function (_a) {
+                        string_response_2 += "".concat(x.currency, ": ").concat(x.value, " \n");
+                        return [2 /*return*/];
+                    });
+                }); });
+                console.log(string_response_2);
+                return [4 /*yield*/, interaction.reply(string_response_2)];
+            case 7:
+                _a.sent();
+                _a.label = 8;
+            case 8: return [2 /*return*/];
         }
     });
 }); });
